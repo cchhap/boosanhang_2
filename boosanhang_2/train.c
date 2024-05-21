@@ -26,7 +26,7 @@
 
 
 //2-1 부산헹(1)코드를 20줄 이내의 함수로 정리한다
-int zom, cit, ma, length, per, move1 = 0, move2 = 0, turn = 0, citloc = 0, zomloc = 0;//변수선언
+int zom, cit, ma, length, per, move1 = 0, move2 = 0, turn = 0, citloc = 0, zomloc = 0, mas = 0;//변수선언
 
 void intro() {
 	printf("\n----------------------\n"); //인트로
@@ -53,9 +53,18 @@ void probability_percentage() { //무언가가 일어날 확률
 	}
 }
 
+void madongseok_stamina() { //마동석 체력
+	printf("madongseok_stamina(0~5)>>");
+	scanf_s("%d", &mas);
+	if (mas < 0 || mas > 5) {
+		return 0;
+	}
+}
+
 int main() {
 	intro();
 	train_length();
+	madongseok_stamina();
 	probability_percentage();
 	
 }
