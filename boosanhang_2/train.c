@@ -60,6 +60,16 @@ void madongseok_stamina() { //마동석 체력
 		return 0;
 	}
 }
+void output_train() { //기차 출력
+	zom = length - 3;
+	cit = length - 6;
+	ma = length - 2;
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < length; j++) {
+			if() // 기차 모양 출력하는 조건문
+		}
+	}
+}
 
 int main() {
 	intro();
