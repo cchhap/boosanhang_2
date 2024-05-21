@@ -57,4 +57,5 @@ int main() {
 	intro();
 	train_length();
 	probability_percentage();
+	
 }
