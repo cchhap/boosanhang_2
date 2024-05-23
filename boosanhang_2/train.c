@@ -64,17 +64,44 @@ void output_train() { //기차 출력
 	zom = length - 3;
 	cit = length - 6;
 	ma = length - 2;
-	for (int i = 0; i < 3; i++) {
-		for (int j = 0; j < length; j++) {
-			if() // 기차 모양 출력하는 조건문
+	for (int i = 0; i < length; i++) {
+		printf("#");
+	}
+
+	printf("\n");
+
+	for (int i = 0; i < length; i++) {
+		if (i == zom) {
+			printf("Z");
 		}
+		else if (i == cit) {
+			printf("C");
+		}
+		else if (i == ma) {
+			printf("M");
+		}
+		else if (i == 0 || i == length - 1) {
+			printf("#");
+		}
+		else {
+			printf(" ");
+		}
+	}
+
+	printf("\n");
+
+	for (int i = 0; i < length; i++) { // 여까지 처음 기차출력
+		printf("#");
 	}
 }
 
 int main() {
+	zom = length - 3;
+	cit = length - 6;
+	ma = length - 2;
 	intro();
 	train_length();
 	madongseok_stamina();
 	probability_percentage();
-	
+	output_train();	
 }
