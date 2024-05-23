@@ -37,27 +37,45 @@ void intro() {
 }
 
 void train_length() { //열차의 길이 입력받기
-	printf("train_length>>");
-	scanf_s("%d", &length);
-	if (length < 15 || length>50) {
-		return 0;
+	while(1){
+		printf("train_length>>");
+		scanf_s("%d", &length);
+		if (length < 15 || length>50) {
+			continue;
+		}
+		else {
+			break;
+		}
 	}
+	
 }
 
 void probability_percentage() { //무언가가 일어날 확률
-	printf("probability_percentage>>");
-	scanf_s("%d", &per);
-	if (per < 10 || per > 90) {
-		return 0;
+	while(1){
+		printf("probability_percentage>>");
+		scanf_s("%d", &per);
+		if (per < 10 || per > 90) {
+			continue;
+		}
+		else {
+			break;
+		}
 	}
+	
 }
 
 void madongseok_stamina() { //마동석 체력
-	printf("madongseok_stamina(0~5)>>");
-	scanf_s("%d", &mas);
-	if (mas < 0 || mas > 5) {
-		return 0;
+	while(1){
+		printf("madongseok_stamina(0~5)>>");
+		scanf_s("%d", &mas);
+		if (mas < 0 || mas > 5) {
+			continue;
+		}
+		else {
+			break;
+		}
 	}
+	
 }
 void output_train() { //기차 출력
 	zom = length - 3;
@@ -94,13 +112,37 @@ void output_train() { //기차 출력
 	}
 }
 
+void random() {//확률
+	srand((unsigned int)time(NULL));
+	move1 = rand() % 100 + 1;
+	move2 = rand() % 100 + 1;
+}
+void cit_status() { //시민 위치 수정
+	while (1) {
+		turn++;
+		citloc = cit; zomloc = zom;
+		if ((100 - per) > move1) {
+			cit--;
+			citloc = cit + 1;
+		}
+		printf("\n");
+}
+
+void zom_status() {//좀비 위치 수정
+	while (1) {
+		if (per > move2 && turn % 2 != 0) {
+			zom--;
+			zomloc = zom + 1;
+		}
+	}
+	printf("\n");
+}
+
 int main() {
-	zom = length - 3;
-	cit = length - 6;
-	ma = length - 2;
-	intro();
-	train_length();
-	madongseok_stamina();
-	probability_percentage();
-	output_train();	
+	intro(); //인트로
+	train_length(); // 기차 길이
+	madongseok_stamina(); // 마동석 스테미나
+	probability_percentage(); // 일어날 확률
+	output_train();	 // 기차 출력
+	random(); // 난수
 }
