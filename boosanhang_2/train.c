@@ -33,7 +33,6 @@ void intro() {
 	printf("\nBooSanHang\n");
 	printf("\n-start now-\n");
 	printf("\n----------------------\n");
-	Sleep(2000);
 	printf("\n\n");
 }
 
