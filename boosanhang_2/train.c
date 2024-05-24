@@ -207,7 +207,7 @@ void status() { //좀비와 시민의 현위치
 		printf("\n");
 	}
 }
-void ma_move() {
+void ma_move() { // 마동석 움직일지 안할지 입력받기
 	while (1) {
 		printf("madongseok move(0:stay, 1:left)>>");
 		scanf_s("%d", &ma_move_1);
@@ -227,7 +227,7 @@ void ma_move() {
 	}
 }
 
-void ma_status() {
+void ma_status() { //마동석 상태
 	if (ma_move_1 == 0) {
 		printf("\nmadongseok stay %d (aggro: %d stamina: %d) \n", ma,ma_aggro, mas);
 	}
@@ -236,6 +236,30 @@ void ma_status() {
 	}
 }
 
+void game_over() { //게임 끝나는거
+	if (cit == 1) {
+		printf("YOU WIN! ...");
+	}
+	else if (cit == zom - 1) {
+		printf("GAME OVER! citizen dead...");
+	}
+	else if (ma == zom - 1) {
+		mas--;
+	}
+}
+
+void citizen_nothing() { // 시민은 아무것도 하지 않았습니다
+	if (cit != 1) {
+		printf("citizen does nothing");
+	}
+
+}
+
+void zombie_attack() { // 좀비 공격
+	if (zom - 1 != cit || zom - 1 != ma) {
+		printf("zombie attacked nobody")
+	}
+}
 
 int main() {
 	srand((unsigned int)time(NULL));
@@ -253,8 +277,11 @@ int main() {
 		output_train_1(); // 기차 출력 ( 처음말고 )
 		status(); // 시민, 좀비 위치
 		ma_move(); // 마동석 이동
-		output_train_1(); // 기차출력
+		printf("\n");
+		printf("\n");
 		ma_status(); //마동석 위치
+		printf("\n");
+		citizen_nothing();
 		printf("\n");
 	}
 	
