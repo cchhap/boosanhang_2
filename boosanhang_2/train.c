@@ -27,7 +27,7 @@
 
 //2-1 부산헹(1)코드를 20줄 이내의 함수로 정리한다 ( 몇개정도는 넘어가도 된다고 하심 )
 int zom = 0; int cit = 0; int ma = 0; int length = 0; int per = 0; int move1 = 0; int move2 = 0; int turn = 0; int citloc = 0; int zomloc = 0; int mas = 0;//변수선언
-int aggro = 1;
+int aggro = 1; int si = 0; int zo = 0;
 
 void intro() {
 	printf("\n----------------------\n"); //인트로
@@ -151,16 +151,63 @@ void cit_status() { //시민 위치 수정
 		if ((100 - per) > move1) {
 			cit--;
 			citloc = cit + 1;
+			aggro++;
+			if (aggro < 0) {
+				aggro = 0;
+			}
+			else if (aggro > 5) {
+				aggro = 5;
+			}
+			si = 0;
 		}
 		else {
 			citloc = cit;
+			aggro--;
+			si = 1;
+			if (aggro < 0) {
+				aggro = 0;
+			}
+			else if (aggro > 5) {
+				aggro = 5;
+			}
 		}
 }
 
 
 void zom_status() {//좀비 위치 수정 ( 홀수턴마다 )
-
+	if (turn % 2 != 0) {
+		zom--;
+		zomloc = zom + 1;
+	}
 }
+
+void status() { //좀비와 시민의 현위치
+	if (si == 0 && turn % 2 == 0) {
+		printf("\n");
+		printf("citizen: %d -> %d (aggro: %d)\n", citloc, cit, aggro);
+		printf("zombie: %d",zom);
+		printf("\n");
+	}
+	else if (si == 0 && turn % 2 != 0) {
+		printf("\n");
+		printf("citizen: %d -> %d (aggro: %d)\n", citloc, cit, aggro);
+		printf("zombie: %d -> %d", zomloc, zom);
+		printf("\n");
+	}
+	else if (si == 1 && turn % 2 == 0) {
+		printf("\n");
+		printf("citizen: %d (aggro: %d)\n", cit, aggro);
+		printf("zombie: %d", zom);
+		printf("\n");
+	}
+	else if (si == 1 && turn % 2 != 0) {
+		printf("\n");
+		printf("citizen: %d  (aggro: %d)\n",cit, aggro);
+		printf("zombie: %d -> %d", zomloc, zom);
+		printf("\n");
+	}
+}
+
 
 int main() {
 	srand((unsigned int)time(NULL));
@@ -172,9 +219,11 @@ int main() {
 	printf("\n");
 	printf("\n");
 	for(int i=0; i<20; i++) {
+		turn++; // 턴증가
 		cit_status(); // 시민 위치 수정
 		zom_status(); // 좀비 위치 수정
 		output_train_1(); // 기차 출력 ( 처음말고 )
+		status();
 		printf("\n");
 	}
 	
