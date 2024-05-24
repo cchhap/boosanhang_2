@@ -27,7 +27,7 @@
 
 //2-1 부산헹(1)코드를 20줄 이내의 함수로 정리한다 ( 몇개정도는 넘어가도 된다고 하심 )
 int zom = 0; int cit = 0; int ma = 0; int length = 0; int per = 0; int move1 = 0; int move2 = 0; int turn = 0; int citloc = 0; int zomloc = 0; int mas = 0;//변수선언
-int aggro = 1; int si = 0; int zo = 0;
+int aggro = 1; int si = 0; int zo = 0; int ma_aggro = 1; int ma_move_1 = 0;
 
 void intro() {
 	printf("\n----------------------\n"); //인트로
@@ -207,6 +207,34 @@ void status() { //좀비와 시민의 현위치
 		printf("\n");
 	}
 }
+void ma_move() {
+	while (1) {
+		printf("madongseok move(0:stay, 1:left)>>");
+		scanf_s("%d", &ma_move_1);
+		if (ma_move_1 == 0) {
+			ma_aggro--;
+			break;
+		}
+		else if (ma_move_1 == 1) {
+			mas--;
+			ma--;
+			ma_aggro++;
+			break;
+		}
+		else {
+			continue;
+		}
+	}
+}
+
+void ma_status() {
+	if (ma_move_1 == 0) {
+		printf("\nmadongseok stay %d (aggro: %d stamina: %d) \n", ma,ma_aggro, mas);
+	}
+	else if (ma_move_1 == 1) {
+		printf("\nmadongseok action %d (aggro: %d stamina: %d)\n ", ma,ma_aggro, mas);
+	}
+}
 
 
 int main() {
@@ -223,7 +251,10 @@ int main() {
 		cit_status(); // 시민 위치 수정
 		zom_status(); // 좀비 위치 수정
 		output_train_1(); // 기차 출력 ( 처음말고 )
-		status();
+		status(); // 시민, 좀비 위치
+		ma_move(); // 마동석 이동
+		output_train_1(); // 기차출력
+		ma_status(); //마동석 위치
 		printf("\n");
 	}
 	
