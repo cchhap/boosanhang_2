@@ -176,9 +176,20 @@ void cit_status() { //시민 위치 수정
 
 void zom_status() {//좀비 위치 수정 ( 홀수턴마다 )
 	if (turn % 2 != 0) {
-		zom--;
-		zomloc = zom + 1;
+		if (zom + 1 == ma) {
+			mas--;
+		}
+		else {
+			if (aggro > ma_aggro) {
+				zom--;
+			}
+			else if (ma_aggro > aggro) {
+				zom++;
+			}
+			zomloc = zom + 1;
+		}
 	}
+	
 }
 
 void status() { //좀비와 시민의 현위치
@@ -255,9 +266,12 @@ void citizen_nothing() { // 시민은 아무것도 하지 않았습니다
 
 }
 
-void zombie_attack() { // 좀비 공격
+void zombie_attack() { // 좀비 공격 메시지
 	if (zom - 1 != cit || zom - 1 != ma) {
-		printf("zombie attacked nobody")
+		printf("zombie attacked nobody");
+	}
+	else if (zom + 1 == ma) {
+		printf("Zombie attacked madongseok(aggro:%d, madongseok stamina: %d -> %d", ma_aggro,mas+1,mas);
 	}
 }
 
@@ -281,7 +295,9 @@ int main() {
 		printf("\n");
 		ma_status(); //마동석 위치
 		printf("\n");
-		citizen_nothing();
+		citizen_nothing(); // 시민 아무것도 안했다
+		printf("\n");
+		zombie_attack(); // 좀비 공격했다
 		printf("\n");
 	}
 	
