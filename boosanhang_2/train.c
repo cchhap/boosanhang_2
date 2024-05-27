@@ -290,14 +290,14 @@ int main() {
 	printf("\n");
 	while(1) {
 		turn++; // 턴증가
-		if (over == 1) {
-			game_over();
-			break;
-		}
 		cit_status(); // 시민 위치 수정
 		zom_status(); // 좀비 위치 수정
 		output_train_1(); // 기차 출력 ( 처음말고 )
 		status(); // 시민, 좀비 위치
+		game_over(); // 게임오버인지 아닌지 계속 검사
+		if (over == 1) {
+			break;
+		}
 		ma_move(); // 마동석 이동
 		printf("\n");
 		printf("\n");
