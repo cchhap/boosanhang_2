@@ -78,6 +78,7 @@ void madongseok_stamina() { //마동석 체력
 	}
 	
 }
+
 void output_train() { //기차 출력
 	zom = length - 3;
 	cit = length - 6;
@@ -175,9 +176,10 @@ void cit_status() { //시민 위치 수정
 
 
 void zom_status() {//좀비 위치 수정 ( 홀수턴마다 )
+	zomloc = zom;
 	if (turn % 2 != 0) {
 		if (zom + 1 == ma) {
-			mas--;
+			zom--;
 		}
 		else {
 			if (aggro > ma_aggro) {
@@ -218,6 +220,7 @@ void status() { //좀비와 시민의 현위치
 		printf("\n");
 	}
 }
+
 void ma_move() { // 마동석 움직일지 안할지 입력받기
 	while (1) {
 		printf("madongseok move(0:stay, 1:left)>>");
