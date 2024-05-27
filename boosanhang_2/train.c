@@ -27,7 +27,7 @@
 
 //2-1 부산헹(1)코드를 20줄 이내의 함수로 정리한다 ( 몇개정도는 넘어가도 된다고 하심 )
 int zom = 0; int cit = 0; int ma = 0; int length = 0; int per = 0; int move1 = 0; int move2 = 0; int turn = 0; int citloc = 0; int zomloc = 0; int mas = 0;//변수선언
-int aggro = 1; int si = 0; int zo = 0; int ma_aggro = 1; int ma_move_1 = 0; int over = 0;
+int aggro = 1; int si = 0; int zo = 0; int ma_aggro = 1; int ma_move_1 = 0; int over = 0; int hold = 0; int pull = 0; int zomma = 0;
 
 void intro() {
 	printf("\n----------------------\n"); //인트로
@@ -282,7 +282,10 @@ void mas_no_0() {
 	}
 }
 
-void game_over_1(){}
+//홀드 할 확률
+void grab(){
+	hold = rand() % 100 + 1;
+}
 
 void citizen_nothing() { // 시민은 아무것도 하지 않았습니다
 	if (cit != 1) {
@@ -297,6 +300,31 @@ void zombie_attack() { // 좀비 공격 메시지
 	else if (zom == ma+1) {
 		printf("Zombie attacked madongseok(aggro:%d, madongseok stamina: %d -> %d", ma_aggro,mas+1,mas);
 	}
+}
+
+// 동석이형 좀비와 인접했을 떄
+void zombie_ma() {
+	if (zom + 1 == ma) {
+		printf("madongseok action( 0.rest, 1.provoke, 2.pull)>>");
+		scanf_s("%d", &zomma);
+		if (zomma == 0) {
+			ma_aggro--;
+			mas++;
+		}
+		else if (zomma == 1) {
+			ma_aggro = STA_MAX;
+		}
+		else if (zomma == 2) {
+			if ((100 - per) > hold) {
+				turn--;
+			}
+		}
+	}
+}
+
+// 동석이형 좀비랑 인접하지 않았을 때
+void no_zombie_ma() {
+
 }
 
 int main() {
