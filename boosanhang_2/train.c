@@ -27,7 +27,7 @@
 
 //2-1 부산헹(1)코드를 20줄 이내의 함수로 정리한다 ( 몇개정도는 넘어가도 된다고 하심 )
 int zom = 0; int cit = 0; int ma = 0; int length = 0; int per = 0; int move1 = 0; int move2 = 0; int turn = 0; int citloc = 0; int zomloc = 0; int mas = 0;//변수선언
-int aggro = 1; int si = 0; int zo = 0; int ma_aggro = 1; int ma_move_1 = 0;
+int aggro = 1; int si = 0; int zo = 0; int ma_aggro = 1; int ma_move_1 = 0; int over = 0;
 
 void intro() {
 	printf("\n----------------------\n"); //인트로
@@ -253,9 +253,11 @@ void ma_status() { //마동석 상태
 void game_over() { //게임 끝나는거
 	if (cit == 1) {
 		printf("YOU WIN! ...");
+		over = 1;
 	}
 	else if (cit == zom - 1) {
 		printf("GAME OVER! citizen dead...");
+		over = 1;
 	}
 	else if (ma == zom - 1) {
 		mas--;
@@ -266,7 +268,6 @@ void citizen_nothing() { // 시민은 아무것도 하지 않았습니다
 	if (cit != 1) {
 		printf("citizen does nothing");
 	}
-
 }
 
 void zombie_attack() { // 좀비 공격 메시지
@@ -287,8 +288,12 @@ int main() {
 	output_train();	 // 기차 출력
 	printf("\n");
 	printf("\n");
-	for(int i=0; i<20; i++) {
+	while(1) {
 		turn++; // 턴증가
+		if (over == 1) {
+			game_over();
+			break;
+		}
 		cit_status(); // 시민 위치 수정
 		zom_status(); // 좀비 위치 수정
 		output_train_1(); // 기차 출력 ( 처음말고 )
