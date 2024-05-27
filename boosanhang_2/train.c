@@ -27,7 +27,7 @@
 
 //2-1 부산헹(1)코드를 20줄 이내의 함수로 정리한다 ( 몇개정도는 넘어가도 된다고 하심 )
 int zom = 0; int cit = 0; int ma = 0; int length = 0; int per = 0; int move1 = 0; int move2 = 0; int turn = 0; int citloc = 0; int zomloc = 0; int mas = 0;//변수선언
-int aggro = 1; int si = 0; int zo = 0; int ma_aggro = 1; int ma_move_1 = 0; int over = 0; int hold = 0; int pull = 0; int zomma = 0;
+int aggro = 1; int si = 0; int zo = 0; int ma_aggro = 1; int ma_move_1 = 0; int over = 0; int hold = 0; int pull = 0; int zomma = 0; int zomma_1;
 
 void intro() {
 	printf("\n----------------------\n"); //인트로
@@ -312,7 +312,7 @@ void zombie_ma() {
 			mas++;
 		}
 		else if (zomma == 1) {
-			ma_aggro = STA_MAX;
+			ma_aggro = STM_MAX;
 		}
 		else if (zomma == 2) {
 			if ((100 - per) > hold) {
@@ -324,7 +324,15 @@ void zombie_ma() {
 
 // 동석이형 좀비랑 인접하지 않았을 때
 void no_zombie_ma() {
-
+	printf("madongseok action( 0.rest, 1.provoke )>>");
+	scanf_s("%d", &zomma_1);
+	if (zomma_1 == 0) {
+		ma_aggro--;
+		mas++;
+	}
+	else if (zomma_1 == 1) {
+		ma_aggro = STM_MAX;
+	}
 }
 
 int main() {
@@ -349,6 +357,9 @@ int main() {
 		ma_move(); // 마동석 이동
 		mas_no_0(); //동석이형 스태미나 관리
 		ma_hurt(); // 동석이형 맞았는지 아닌지 보기
+		printf("\n");
+		zombie_ma(); //좀비랑 인접할 때
+		no_zombie_ma(); // 좀비랑 인접하지 않을 때
 		printf("\n");
 		printf("\n");
 		output_train_1();
