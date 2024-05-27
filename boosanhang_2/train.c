@@ -153,11 +153,11 @@ void cit_status() { //시민 위치 수정
 			cit--;
 			citloc = cit + 1;
 			aggro++;
-			if (aggro < 0) {
-				aggro = 0;
+			if (aggro < AGGRO_MIN) {
+				aggro = AGGRO_MIN;
 			}
-			else if (aggro > 5) {
-				aggro = 5;
+			else if (aggro > AGGRO_MAX) {
+				aggro = AGGRO_MAX;
 			}
 			si = 0;
 		}
@@ -165,11 +165,11 @@ void cit_status() { //시민 위치 수정
 			citloc = cit;
 			aggro--;
 			si = 1;
-			if (aggro < 0) {
-				aggro = 0;
+			if (aggro < AGGRO_MIN) {
+				aggro = AGGRO_MIN;
 			}
-			else if (aggro > 5) {
-				aggro = 5;
+			else if (aggro > AGGRO_MAX) {
+				aggro = AGGRO_MAX;
 			}
 		}
 }
