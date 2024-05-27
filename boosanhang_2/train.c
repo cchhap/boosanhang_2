@@ -308,16 +308,22 @@ void zombie_ma() {
 		printf("madongseok action( 0.rest, 1.provoke, 2.pull)>>");
 		scanf_s("%d", &zomma);
 		if (zomma == 0) {
+			printf("madongseok rests...");
 			ma_aggro--;
 			mas_no_0();
 			mas++;
 		}
 		else if (zomma == 1) {
 			ma_aggro = STM_MAX;
+			printf("madongseok provoked zombie...");
 		}
 		else if (zomma == 2) {
 			if ((100 - per) > hold) {
+				printf("madongseok pulled zombie... Next turn, it can't move");
 				turn--;
+			}
+			else {
+				printf("madongseok failed to pull zombie");
 			}
 		}
 	}
@@ -329,11 +335,13 @@ void no_zombie_ma() {
 		printf("madongseok action( 0.rest, 1.provoke )>>");
 		scanf_s("%d", &zomma_1);
 		if (zomma_1 == 0) {
+			printf("madongseok rests...");
 			ma_aggro--;
 			mas_no_0();
 			mas++;
 		}
 		else if (zomma_1 == 1) {
+			printf("madongseok provoked zombie...");
 			ma_aggro = STM_MAX;
 		}
 	}
