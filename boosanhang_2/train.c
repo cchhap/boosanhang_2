@@ -322,7 +322,7 @@ void zombie_ma() {
 				printf("madongseok pulled zombie... Next turn, it can't move");
 				turn--;
 			}
-			else {
+			else if((100-per)<hold) {
 				printf("madongseok failed to pull zombie");
 			}
 		}
@@ -345,6 +345,24 @@ void no_zombie_ma() {
 			ma_aggro = STM_MAX;
 		}
 	}
+}
+
+// 동석이형,시민 vs 좀비
+void high_aggro() {
+	if (ma_aggro > aggro) {
+		printf("Zomibe attacked madongseok (aggro: %d vs. %d, madongseok stamina: %d -> %d)", aggro, ma_aggro, mas + 1, mas);
+	}
+	else if (ma_aggro < aggro) {
+		over = 1;
+	}
+}
+
+// 동석이형 시민 좀비 만났을때
+void meeting() {
+	if (cit - 1 == zom &&  zom == ma + 1) {
+		high_aggro();
+	}
+	
 }
 
 int main() {
