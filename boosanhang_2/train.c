@@ -223,20 +223,32 @@ void status() { //좀비와 시민의 현위치
 
 void ma_move() { // 마동석 움직일지 안할지 입력받기
 	while (1) {
-		printf("madongseok move(0:stay, 1:left)>>");
-		scanf_s("%d", &ma_move_1);
-		if (ma_move_1 == 0) {
-			ma_aggro--;
-			break;
-		}
-		else if (ma_move_1 == 1) {
-			mas--;
-			ma--;
-			ma_aggro++;
-			break;
+		if (turn != 1) {
+			if (zom - 1 == ma) {
+				printf("madongseok move(0:stay, 1:left)>>");
+				scanf_s("%d", &ma_move_1);
+				if (ma_move_1 == 0) {
+					ma_aggro--;
+					break;
+				}
+				else if (ma_move_1 == 1) {
+					mas--;
+					ma--;
+					ma_aggro++;
+					break;
+				}
+				else {
+					continue;
+				}
+			}
 		}
 		else {
-			continue;
+			printf("madongseok move(0:stay)>>");
+			scanf_s("%d", &ma_move_1);
+			if (ma_move_1 == 0) {
+				ma_aggro--;
+				break;
+			}
 		}
 	}
 }
@@ -352,6 +364,7 @@ void no_zombie_ma() {
 // 동석이형,시민 vs 좀비
 void high_aggro() {
 	if (ma_aggro > aggro) {
+		mas_no_0();
 		printf("Zomibe attacked madongseok (aggro: %d vs. %d, madongseok stamina: %d -> %d)", aggro, ma_aggro, mas + 1, mas);
 	}
 	else if (ma_aggro < aggro) {
