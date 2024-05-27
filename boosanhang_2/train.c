@@ -259,7 +259,7 @@ void game_over() { //게임 끝나는거
 		printf("GAME OVER! citizen dead...");
 		over = 1;
 	}
-	else if (mas == 0) {
+	else if (mas == STM_MIN) {
 		printf("GAME OVER!citizen dead...");
 		over = 1;
 	}
@@ -309,6 +309,7 @@ void zombie_ma() {
 		scanf_s("%d", &zomma);
 		if (zomma == 0) {
 			ma_aggro--;
+			mas_no_0();
 			mas++;
 		}
 		else if (zomma == 1) {
@@ -324,14 +325,17 @@ void zombie_ma() {
 
 // 동석이형 좀비랑 인접하지 않았을 때
 void no_zombie_ma() {
-	printf("madongseok action( 0.rest, 1.provoke )>>");
-	scanf_s("%d", &zomma_1);
-	if (zomma_1 == 0) {
-		ma_aggro--;
-		mas++;
-	}
-	else if (zomma_1 == 1) {
-		ma_aggro = STM_MAX;
+	if (zom + 1 != ma) {
+		printf("madongseok action( 0.rest, 1.provoke )>>");
+		scanf_s("%d", &zomma_1);
+		if (zomma_1 == 0) {
+			ma_aggro--;
+			mas_no_0();
+			mas++;
+		}
+		else if (zomma_1 == 1) {
+			ma_aggro = STM_MAX;
+		}
 	}
 }
 
