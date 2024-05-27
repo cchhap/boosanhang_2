@@ -29,15 +29,17 @@
 int zom = 0; int cit = 0; int ma = 0; int length = 0; int per = 0; int move1 = 0; int move2 = 0; int turn = 0; int citloc = 0; int zomloc = 0; int mas = 0;//변수선언
 int aggro = 1; int si = 0; int zo = 0; int ma_aggro = 1; int ma_move_1 = 0; int over = 0; int hold = 0; int pull = 0; int zomma = 0; int zomma_1;
 
+// 인트로
 void intro() {
-	printf("\n----------------------\n"); //인트로
+	printf("\n----------------------\n");
 	printf("\nBooSanHang\n");
 	printf("\n-start now-\n");
 	printf("\n----------------------\n");
 	printf("\n\n");
 }
 
-void train_length() { //열차의 길이 입력받기
+//열차의 길이 입력받기
+void train_length() { 
 	while(1){
 		printf("train_length(15~50)>>");
 		scanf_s("%d", &length);
@@ -51,6 +53,7 @@ void train_length() { //열차의 길이 입력받기
 	
 }
 
+//무언가가 일어날 확률
 void probability_percentage() { //무언가가 일어날 확률
 	while(1){
 		printf("probability_percentage 'p' (10~90)>>");
@@ -65,7 +68,8 @@ void probability_percentage() { //무언가가 일어날 확률
 	
 }
 
-void madongseok_stamina() { //마동석 체력
+//마동석 체력
+void madongseok_stamina() {
 	while(1){
 		printf("madongseok_stamina(0~5)>>");
 		scanf_s("%d", &mas);
@@ -79,7 +83,8 @@ void madongseok_stamina() { //마동석 체력
 	
 }
 
-void output_train() { //기차 출력
+//기차 출력
+void output_train() {
 	zom = length - 3;
 	cit = length - 6;
 	ma = length - 2;
@@ -114,7 +119,8 @@ void output_train() { //기차 출력
 	}
 }
 
-void output_train_1() { //기차 출력 ( 처음말고 그 다음 )
+//기차 출력 ( 처음말고 그 다음 )
+void output_train_1() { 
 	for (int i = 0; i < length; i++) {
 		printf("#");
 	}
@@ -146,8 +152,8 @@ void output_train_1() { //기차 출력 ( 처음말고 그 다음 )
 	}
 }
 
-
-void cit_status() { //시민 위치 수정
+//시민 위치 수정
+void cit_status() {
 	move1 = rand() % 100 + 1;
 		if ((100 - per) > move1) {
 			cit--;
@@ -174,9 +180,8 @@ void cit_status() { //시민 위치 수정
 		}
 }
 
-
-void zom_status() {//좀비 위치 수정 ( 홀수턴마다 )
-	zomloc = zom;
+//좀비 위치 수정 ( 홀수턴마다 )
+void zom_status() {
 	if (turn % 2 != 0) {
 		if (zom + 1 == ma) {
 			zom--;
@@ -194,7 +199,8 @@ void zom_status() {//좀비 위치 수정 ( 홀수턴마다 )
 	
 }
 
-void status() { //좀비와 시민의 현위치
+//좀비와 시민의 현위치
+void status() {
 	if (si == 0 && turn % 2 == 0) {
 		printf("\n");
 		printf("citizen: %d -> %d (aggro: %d)\n", citloc, cit, aggro);
@@ -221,7 +227,8 @@ void status() { //좀비와 시민의 현위치
 	}
 }
 
-void ma_move() { // 마동석 움직일지 안할지 입력받기
+// 마동석 움직일지 안할지 입력받기
+void ma_move() { 
 	while (1) {
 		if (turn != 1) {
 			if (zom - 1 == ma) {
@@ -253,7 +260,8 @@ void ma_move() { // 마동석 움직일지 안할지 입력받기
 	}
 }
 
-void ma_status() { //마동석 상태
+//마동석 상태
+void ma_status() { 
 	if (ma_move_1 == 0) {
 		printf("\nmadongseok stay %d (aggro: %d stamina: %d) \n", ma,ma_aggro, mas);
 	}
@@ -262,7 +270,8 @@ void ma_status() { //마동석 상태
 	}
 }
 
-void game_over() { //게임 끝나는거
+//게임 끝나는거
+void game_over() {
 	if (cit == 1) {
 		printf("YOU WIN! ...");
 		over = 1;
@@ -299,13 +308,15 @@ void grab(){
 	hold = rand() % 100 + 1;
 }
 
-void citizen_nothing() { // 시민은 아무것도 하지 않았습니다
+// 시민은 아무것도 하지 않았습니다
+void citizen_nothing() {
 	if (cit != 1) {
 		printf("citizen does nothing");
 	}
 }
 
-void zombie_attack() { // 좀비 공격 메시지
+// 좀비 공격 메시지
+void zombie_attack() {
 	if (zom - 1 != cit || zom - 1 != ma) {
 		printf("zombie attacked nobody");
 	}
