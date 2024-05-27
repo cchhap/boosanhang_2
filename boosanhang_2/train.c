@@ -270,11 +270,11 @@ void ma_hurt() {
 
 //마동석 스테미나 안내려가게 하는거
 void mas_no_0() {
-	if (mas < AGGRO_MIN) {
-		mas = AGGRO_MIN;
+	if (ma_aggro < AGGRO_MIN) {
+		ma_aggro = AGGRO_MIN;
 	}
-	else if(mas > AGGRO_MAX) {
-		mas = AGGRO_MAX;
+	else if(ma_aggro > AGGRO_MAX) {
+		ma_aggro = AGGRO_MAX;
 	}
 }
 
@@ -315,8 +315,8 @@ int main() {
 			break;
 		}
 		ma_move(); // 마동석 이동
-		ma_hurt(); // 동석이형 맞았는지 아닌지 보기
 		mas_no_0(); //동석이형 스태미나 관리
+		ma_hurt(); // 동석이형 맞았는지 아닌지 보기
 		printf("\n");
 		printf("\n");
 		output_train_1();
