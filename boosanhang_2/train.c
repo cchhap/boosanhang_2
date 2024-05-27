@@ -69,7 +69,7 @@ void madongseok_stamina() { //마동석 체력
 	while(1){
 		printf("madongseok_stamina(0~5)>>");
 		scanf_s("%d", &mas);
-		if (mas < 0 || mas > 5) {
+		if (mas < STM_MIN || mas > STM_MAX) {
 			continue;
 		}
 		else {
@@ -321,6 +321,8 @@ void zombie_ma() {
 			if ((100 - per) > hold) {
 				printf("madongseok pulled zombie... Next turn, it can't move");
 				turn--;
+				ma_aggro++; ma_aggro++; mas--;
+				printf("\nmadongseok:%d (aggro: %d -> %d, stamina: %d -> %d)", ma,ma_aggro-2, ma_aggro, mas+1, mas);
 			}
 			else if((100-per)<hold) {
 				printf("madongseok failed to pull zombie");
