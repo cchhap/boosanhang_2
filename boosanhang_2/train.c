@@ -198,7 +198,7 @@ void status() { //좀비와 시민의 현위치
 	if (si == 0 && turn % 2 == 0) {
 		printf("\n");
 		printf("citizen: %d -> %d (aggro: %d)\n", citloc, cit, aggro);
-		printf("zombie: %d",zom);
+		printf("zombie: %d ( cannot move )",zom);
 		printf("\n");
 	}
 	else if (si == 0 && turn % 2 != 0) {
@@ -210,7 +210,7 @@ void status() { //좀비와 시민의 현위치
 	else if (si == 1 && turn % 2 == 0) {
 		printf("\n");
 		printf("citizen: %d (aggro: %d)\n", cit, aggro);
-		printf("zombie: %d", zom);
+		printf("zombie: %d ( cannot move )", zom);
 		printf("\n");
 	}
 	else if (si == 1 && turn % 2 != 0) {
@@ -259,6 +259,10 @@ void game_over() { //게임 끝나는거
 		printf("GAME OVER! citizen dead...");
 		over = 1;
 	}
+	else if (mas == 0) {
+		printf("GAME OVER!citizen dead...");
+		over = 1;
+	}
 }
 
 //마동석 스테미나 깎이는거
@@ -290,7 +294,7 @@ void zombie_attack() { // 좀비 공격 메시지
 	if (zom - 1 != cit || zom - 1 != ma) {
 		printf("zombie attacked nobody");
 	}
-	else if (zom + 1 == ma) {
+	else if (zom == ma+1) {
 		printf("Zombie attacked madongseok(aggro:%d, madongseok stamina: %d -> %d", ma_aggro,mas+1,mas);
 	}
 }
