@@ -259,10 +259,26 @@ void game_over() { //게임 끝나는거
 		printf("GAME OVER! citizen dead...");
 		over = 1;
 	}
-	else if (ma == zom - 1) {
+}
+
+//마동석 스테미나 깎이는거
+void ma_hurt() {
+	if (ma == zom - 1) {
 		mas--;
 	}
 }
+
+//마동석 스테미나 안내려가게 하는거
+void mas_no_0() {
+	if (mas < AGGRO_MIN) {
+		mas = AGGRO_MIN;
+	}
+	else if(mas > AGGRO_MAX) {
+		mas = AGGRO_MAX;
+	}
+}
+
+void game_over_1(){}
 
 void citizen_nothing() { // 시민은 아무것도 하지 않았습니다
 	if (cit != 1) {
@@ -299,7 +315,11 @@ int main() {
 			break;
 		}
 		ma_move(); // 마동석 이동
+		ma_hurt(); // 동석이형 맞았는지 아닌지 보기
+		mas_no_0(); //동석이형 스태미나 관리
 		printf("\n");
+		printf("\n");
+		output_train_1();
 		printf("\n");
 		ma_status(); //마동석 위치
 		printf("\n");
