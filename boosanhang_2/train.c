@@ -39,8 +39,8 @@ void intro() {
 }
 
 //열차의 길이 입력받기 2-1
-void train_length() { 
-	while(1){
+void train_length() {
+	while (1) {
 		printf("train_length(15~50)>>");
 		scanf_s("%d", &length);
 		if (length < 15 || length>50) {
@@ -50,12 +50,12 @@ void train_length() {
 			break;
 		}
 	}
-	
+
 }
 
 //무언가가 일어날 확률 2-1
 void probability_percentage() { //무언가가 일어날 확률
-	while(1){
+	while (1) {
 		printf("probability_percentage 'p' (10~90)>>");
 		scanf_s("%d", &per);
 		if (per < 10 || per > 90) {
@@ -65,12 +65,12 @@ void probability_percentage() { //무언가가 일어날 확률
 			break;
 		}
 	}
-	
+
 }
 
 //마동석 체력
 void madongseok_stamina() {
-	while(1){
+	while (1) {
 		printf("madongseok_stamina(0~5)>>");
 		scanf_s("%d", &mas);
 		if (mas < STM_MIN || mas > STM_MAX) {
@@ -80,7 +80,7 @@ void madongseok_stamina() {
 			break;
 		}
 	}
-	
+
 }
 
 // 위치 2-1
@@ -124,7 +124,7 @@ void output_train() {
 }
 
 //기차 출력 ( 처음말고 그 다음 )
-void output_train_1() { 
+void output_train_1() {
 	for (int i = 0; i < length; i++) {
 		printf("#");
 	}
@@ -159,29 +159,29 @@ void output_train_1() {
 //시민 위치 수정 2-3 <이동>
 void cit_status() {
 	move1 = rand() % 100 + 1;
-		if ((100 - per) > move1) {
-			cit--;
-			citloc = cit + 1;
-			aggro++;
-			if (aggro < AGGRO_MIN) {
-				aggro = AGGRO_MIN;
-			}
-			else if (aggro > AGGRO_MAX) {
-				aggro = AGGRO_MAX;
-			}
-			si = 0;
+	if ((100 - per) > move1) {
+		cit--;
+		citloc = cit + 1;
+		aggro++;
+		if (aggro < AGGRO_MIN) {
+			aggro = AGGRO_MIN;
 		}
-		else {
-			citloc = cit;
-			aggro--;
-			si = 1;
-			if (aggro < AGGRO_MIN) {
-				aggro = AGGRO_MIN;
-			}
-			else if (aggro > AGGRO_MAX) {
-				aggro = AGGRO_MAX;
-			}
+		else if (aggro > AGGRO_MAX) {
+			aggro = AGGRO_MAX;
 		}
+		si = 0;
+	}
+	else {
+		citloc = cit;
+		aggro--;
+		si = 1;
+		if (aggro < AGGRO_MIN) {
+			aggro = AGGRO_MIN;
+		}
+		else if (aggro > AGGRO_MAX) {
+			aggro = AGGRO_MAX;
+		}
+	}
 }
 
 //좀비 위치 수정 2-3 <이동>
@@ -201,7 +201,7 @@ void zom_status() {
 			zomloc = zom + 1;
 		}
 	}
-	
+
 }
 
 //좀비와 시민의 현위치 2-3 <이동>
@@ -209,7 +209,7 @@ void status() {
 	if (si == 0 && turn % 2 == 0) {
 		printf("\n");
 		printf("citizen: %d -> %d (aggro: %d)\n", citloc, cit, aggro);
-		printf("zombie: %d ( cannot move )",zom);
+		printf("zombie: %d ( cannot move )", zom);
 		printf("\n");
 	}
 	else if (si == 0 && turn % 2 != 0) {
@@ -226,14 +226,14 @@ void status() {
 	}
 	else if (si == 1 && turn % 2 != 0) {
 		printf("\n");
-		printf("citizen: %d  (aggro: %d)\n",cit, aggro);
+		printf("citizen: %d  (aggro: %d)\n", cit, aggro);
 		printf("zombie: %d -> %d", zomloc, zom);
 		printf("\n");
 	}
 }
 
 // 마동석 움직일지 안할지 입력받기 2-3 <이동>
-void ma_move() { 
+void ma_move() {
 	while (1) {
 		if (turn != 1) {
 			if (zom - 1 == ma) {
@@ -266,12 +266,12 @@ void ma_move() {
 }
 
 //마동석 상태  2-3 <이동>
-void ma_status() { 
+void ma_status() {
 	if (ma_move_1 == 0) {
-		printf("\nmadongseok stay %d (aggro: %d stamina: %d) \n", ma,ma_aggro, mas);
+		printf("\nmadongseok stay %d (aggro: %d stamina: %d) \n", ma, ma_aggro, mas);
 	}
 	else if (ma_move_1 == 1) {
-		printf("\nmadongseok action %d (aggro: %d stamina: %d)\n ", ma,ma_aggro, mas);
+		printf("\nmadongseok action %d (aggro: %d stamina: %d)\n ", ma, ma_aggro, mas);
 	}
 }
 
@@ -303,13 +303,13 @@ void mas_no_0() {
 	if (ma_aggro < AGGRO_MIN) {
 		ma_aggro = AGGRO_MIN;
 	}
-	else if(ma_aggro > AGGRO_MAX) {
+	else if (ma_aggro > AGGRO_MAX) {
 		ma_aggro = AGGRO_MAX;
 	}
 }
 
 //홀드 할 확률 2-3 <이동> : 예외처리
-void grab(){
+void grab() {
 	hold = rand() % 100 + 1;
 }
 
@@ -325,8 +325,8 @@ void zombie_attack() {
 	if (zom - 1 != cit || zom - 1 != ma) {
 		printf("zombie attacked nobody");
 	}
-	else if (zom == ma+1) {
-		printf("Zombie attacked madongseok(aggro:%d, madongseok stamina: %d -> %d", ma_aggro,mas+1,mas);
+	else if (zom == ma + 1) {
+		printf("Zombie attacked madongseok(aggro:%d, madongseok stamina: %d -> %d", ma_aggro, mas + 1, mas);
 	}
 }
 
@@ -350,9 +350,9 @@ void zombie_ma() {
 				printf("madongseok pulled zombie... Next turn, it can't move");
 				turn--;
 				ma_aggro++; ma_aggro++; mas--;
-				printf("\nmadongseok:%d (aggro: %d -> %d, stamina: %d -> %d)", ma,ma_aggro-2, ma_aggro, mas+1, mas);
+				printf("\nmadongseok:%d (aggro: %d -> %d, stamina: %d -> %d)", ma, ma_aggro - 2, ma_aggro, mas + 1, mas);
 			}
-			else if((100-per)<hold) {
+			else if ((100 - per) < hold) {
 				printf("madongseok failed to pull zombie");
 			}
 		}
@@ -390,10 +390,10 @@ void high_aggro() {
 
 // 동석이형 시민 좀비 만났을때 2-4 <행동>
 void meeting() {
-	if (cit - 1 == zom &&  zom == ma + 1) {
+	if (cit - 1 == zom && zom == ma + 1) {
 		high_aggro();
 	}
-	
+
 }
 
 int main() {
@@ -406,7 +406,7 @@ int main() {
 	output_train();	 // 기차 출력
 	printf("\n");
 	printf("\n");
-	while(1) {
+	while (1) {
 		turn++; // 턴증가
 		cit_status(); // 시민 위치 수정
 		zom_status(); // 좀비 위치 수정
@@ -433,5 +433,5 @@ int main() {
 		zombie_attack(); // 좀비 공격했다
 		printf("\n");
 	}
-	
+
 }
