@@ -215,7 +215,12 @@ void status() {
 	else if (si == 0 && turn % 2 != 0) {
 		printf("\n");
 		printf("citizen: %d -> %d (aggro: %d)\n", citloc, cit, aggro);
-		printf("zombie: %d -> %d", zomloc, zom);
+		if (zomloc < zom) {
+			printf("zombie: %d -> %d", zom, zomloc);
+		}
+		else if (zomloc > zom) {
+			printf("zombie: %d -> %d", zomloc, zom);
+		}
 		printf("\n");
 	}
 	else if (si == 1 && turn % 2 == 0) {
@@ -227,7 +232,12 @@ void status() {
 	else if (si == 1 && turn % 2 != 0) {
 		printf("\n");
 		printf("citizen: %d  (aggro: %d)\n", cit, aggro);
-		printf("zombie: %d -> %d", zomloc, zom);
+		if (zomloc < zom) {
+			printf("zombie: %d -> %d", zom, zomloc);
+		}
+		else if (zomloc > zom) {
+			printf("zombie: %d -> %d", zomloc, zom);
+		}
 		printf("\n");
 	}
 }
@@ -263,14 +273,28 @@ void ma_move() {
 	}
 }
 
+//마동석 스테미나 안내려가게 하는거 2-3 <이동>
+void mas_no_0() {
+	if (ma_aggro < AGGRO_MIN) {
+		ma_aggro = AGGRO_MIN;
+	}
+	else if (ma_aggro > AGGRO_MAX) {
+		ma_aggro = AGGRO_MAX;
+	}
+}
+
 //마동석 상태  2-3 <이동>
 void ma_status() {
+	mas_no_0();
 	if (ma_move_1 == 0) {
+		mas_no_0();
 		printf("\nmadongseok stay %d (aggro: %d stamina: %d) \n", ma, ma_aggro, mas);
 	}
 	else if (ma_move_1 == 1) {
+		mas_no_0();
 		printf("\nmadongseok action %d (aggro: %d stamina: %d)\n ", ma, ma_aggro, mas);
 	}
+	mas_no_0();
 }
 
 //게임 끝나는거
@@ -284,7 +308,7 @@ void game_over() {
 		over = 1;
 	}
 	else if (mas == STM_MIN) {
-		printf("GAME OVER!citizen dead...");
+		printf("GAME OVER! madongseok dead...");
 		over = 1;
 	}
 }
@@ -293,16 +317,6 @@ void game_over() {
 void ma_hurt() {
 	if (ma == zom - 1) {
 		mas--;
-	}
-}
-
-//마동석 스테미나 안내려가게 하는거 2-3 <이동>
-void mas_no_0() {
-	if (ma_aggro < AGGRO_MIN) {
-		ma_aggro = AGGRO_MIN;
-	}
-	else if (ma_aggro > AGGRO_MAX) {
-		ma_aggro = AGGRO_MAX;
 	}
 }
 
@@ -318,6 +332,19 @@ void citizen_nothing() {
 	}
 }
 
+// 동석이형,시민 vs 좀비 2-4 <행동> 
+void high_aggro() {
+	mas_no_0();
+	if (ma_aggro > aggro) {
+		mas_no_0();
+		printf("\nZomibe attacked madongseok (aggro: %d vs. %d, madongseok stamina: %d -> %d)", aggro, ma_aggro, mas + 1, mas);
+	}
+	else if (ma_aggro < aggro) {
+		over = 1;
+	}
+	mas_no_0();
+}
+
 // 좀비 공격 메시지 2-3 <이동>
 void zombie_attack() {
 	if (zom - 1 != cit || zom - 1 != ma) {
@@ -325,6 +352,7 @@ void zombie_attack() {
 	}
 	else if (zom == ma + 1) {
 		printf("Zombie attacked madongseok(aggro:%d, madongseok stamina: %d -> %d", ma_aggro, mas + 1, mas);
+		high_aggro();
 	}
 }
 
@@ -334,24 +362,25 @@ void zombie_ma() {
 		printf("madongseok action( 0.rest, 1.provoke, 2.pull)>>");
 		scanf_s("%d", &zomma);
 		if (zomma == 0) {
-			printf("madongseok rests...");
+			printf("\nmadongseok rests...");
 			ma_aggro--;
 			mas_no_0();
 			mas++;
 		}
 		else if (zomma == 1) {
 			ma_aggro = STM_MAX;
-			printf("madongseok provoked zombie...");
+			printf("\nmadongseok provoked zombie...");
 		}
 		else if (zomma == 2) {
 			if ((100 - per) > hold) {
-				printf("madongseok pulled zombie... Next turn, it can't move");
+				printf("\nmadongseok pulled zombie... Next turn, it can't move");
 				turn--;
 				ma_aggro++; ma_aggro++; mas--;
+				mas_no_0();
 				printf("\nmadongseok:%d (aggro: %d -> %d, stamina: %d -> %d)", ma, ma_aggro - 2, ma_aggro, mas + 1, mas);
 			}
 			else if ((100 - per) < hold) {
-				printf("madongseok failed to pull zombie");
+				printf("\nmadongseok failed to pull zombie");
 			}
 		}
 	}
@@ -363,26 +392,15 @@ void no_zombie_ma() {
 		printf("madongseok action( 0.rest, 1.provoke )>>");
 		scanf_s("%d", &zomma_1);
 		if (zomma_1 == 0) {
-			printf("madongseok rests...");
+			printf("\nmadongseok rests...");
 			ma_aggro--;
 			mas_no_0();
 			mas++;
 		}
 		else if (zomma_1 == 1) {
-			printf("madongseok provoked zombie...");
+			printf("\nmadongseok provoked zombie...");
 			ma_aggro = STM_MAX;
 		}
-	}
-}
-
-// 동석이형,시민 vs 좀비 2-4 <행동> 
-void high_aggro() {
-	if (ma_aggro > aggro) {
-		mas_no_0();
-		printf("Zomibe attacked madongseok (aggro: %d vs. %d, madongseok stamina: %d -> %d)", aggro, ma_aggro, mas + 1, mas);
-	}
-	else if (ma_aggro < aggro) {
-		over = 1;
 	}
 }
 
@@ -406,20 +424,37 @@ int main() {
 	printf("\n");
 	while (1) {
 		turn++; // 턴증가
+		mas_no_0();
 		cit_status(); // 시민 위치 수정
 		zom_status(); // 좀비 위치 수정
 		output_train_1(); // 기차 출력 ( 처음말고 )
+		mas_no_0();
 		status(); // 시민, 좀비 위치
+		mas_no_0();
 		game_over(); // 게임오버인지 아닌지 계속 검사
 		if (over == 1) {
 			break;
 		}
 		printf("\n");
+		mas_no_0();
 		ma_move(); // 마동석 이동관련 
+		mas_no_0(); // 마동석 스태미나 관리
+		printf("\n");
+		output_train_1(); // 열차출력
+		printf("\n");
+		mas_no_0(); // 마동석 스태미나 관리
+		ma_status(); // 마동석 어그로, 스테미나
 		printf("\n");
 		citizen_nothing(); // 시민 아무것도 안했다
 		printf("\n");
 		zombie_attack(); // 좀비 공격했다
+		printf("\n");
+		ma_hurt(); // 마동석 아프다
+		mas_no_0(); // 마동석 스태미나 관리
+		grab(); // 그랩 확률 
+		zombie_ma(); // 마동석 행동 3가지
+		no_zombie_ma(); // 마동석 행동 3가지
+		ma_status(); // 마동석 어그로, 스태미나
 		printf("\n");
 	}
 
