@@ -83,11 +83,15 @@ void madongseok_stamina() {
 	
 }
 
-//기차 출력
-void output_train() {
+// 위치
+void location() {
 	zom = length - 3;
 	cit = length - 6;
 	ma = length - 2;
+}
+
+//기차 출력
+void output_train() {
 	for (int i = 0; i < length; i++) {
 		printf("#");
 	}
@@ -395,6 +399,7 @@ int main() {
 	srand((unsigned int)time(NULL));
 	intro(); //인트로
 	train_length(); // 기차 길이
+	location(); // 캐릭터들 위치 설정
 	madongseok_stamina(); // 마동석 스테미나
 	probability_percentage(); // 일어날 확률
 	output_train();	 // 기차 출력
