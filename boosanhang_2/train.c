@@ -26,7 +26,7 @@
 
 
 //2-1 부산헹(1)코드를 20줄 이내의 함수로 정리한다
-int zom = 0; int cit = 0; int ma = 0; int length = 0; int per = 0; int move1 = 0; int move2 = 0; int turn = 0; int citloc = 0; int zomloc = 0; int mas = 0;//변수선언
+int zom = 0; int cit = 0; int ma = 0; int length = 0; int per = 0; int move1 = 0; int move2 = 0; int turn = 0; int citloc = 0; int zomloc = 0; int mas = 0; //변수선언
 int aggro = 1; int si = 0; int zo = 0; int ma_aggro = 1; int ma_move_1 = 0; int over = 0; int hold = 0; int pull = 0; int zomma = 0; int zomma_1;
 
 // 인트로 2-1
@@ -235,23 +235,21 @@ void status() {
 // 마동석 움직일지 안할지 입력받기 2-3 <이동>
 void ma_move() {
 	while (1) {
-		if (turn != 1) {
-			if (zom - 1 == ma) {
-				printf("madongseok move(0:stay, 1:left)>>");
-				scanf_s("%d", &ma_move_1);
-				if (ma_move_1 == 0) {
-					ma_aggro--;
-					break;
-				}
-				else if (ma_move_1 == 1) {
-					mas--;
-					ma--;
-					ma_aggro++;
-					break;
-				}
-				else {
-					continue;
-				}
+		if (zom - 1 != ma) {
+			printf("madongseok move(0:stay, 1:left)>>");
+			scanf_s("%d", &ma_move_1);
+			if (ma_move_1 == 0) {
+				ma_aggro--;
+				break;
+			}
+			else if (ma_move_1 == 1) {
+				mas--;
+				ma--;
+				ma_aggro++;
+				break;
+			}
+			else {
+				break;
 			}
 		}
 		else {
@@ -416,17 +414,8 @@ int main() {
 		if (over == 1) {
 			break;
 		}
-		ma_move(); // 마동석 이동
-		mas_no_0(); //동석이형 스태미나 관리
-		ma_hurt(); // 동석이형 맞는지 아닌지 보기
 		printf("\n");
-		zombie_ma(); //좀비랑 인접할 때
-		no_zombie_ma(); // 좀비랑 인접하지 않을 때
-		printf("\n");
-		printf("\n");
-		output_train_1();
-		printf("\n");
-		ma_status(); //마동석 위치
+		ma_move(); // 마동석 이동관련 
 		printf("\n");
 		citizen_nothing(); // 시민 아무것도 안했다
 		printf("\n");
