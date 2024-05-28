@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-// 파라미터
+// 파라미터 2-2 부산행(1)에서 수정
 #define LEN_MIN 15 // 기차 길이
 #define LEN_MAX 50
 #define STM_MIN 0 // 마동석 체력
@@ -25,7 +25,7 @@
 #define ACTION_PULL 2
 
 
-//2-1 부산헹(1)코드를 20줄 이내의 함수로 정리한다 ( 몇개정도는 넘어가도 된다고 하심 )
+//2-1 부산헹(1)코드를 20줄 이내의 함수로 정리한다
 int zom = 0; int cit = 0; int ma = 0; int length = 0; int per = 0; int move1 = 0; int move2 = 0; int turn = 0; int citloc = 0; int zomloc = 0; int mas = 0;//변수선언
 int aggro = 1; int si = 0; int zo = 0; int ma_aggro = 1; int ma_move_1 = 0; int over = 0; int hold = 0; int pull = 0; int zomma = 0; int zomma_1;
 
@@ -156,7 +156,7 @@ void output_train_1() {
 	}
 }
 
-//시민 위치 수정
+//시민 위치 수정 2-3 <이동>
 void cit_status() {
 	move1 = rand() % 100 + 1;
 		if ((100 - per) > move1) {
@@ -184,7 +184,7 @@ void cit_status() {
 		}
 }
 
-//좀비 위치 수정 ( 홀수턴마다 )
+//좀비 위치 수정 2-3 <이동>
 void zom_status() {
 	if (turn % 2 != 0) {
 		if (zom + 1 == ma) {
@@ -204,7 +204,7 @@ void zom_status() {
 	
 }
 
-//좀비와 시민의 현위치
+//좀비와 시민의 현위치 2-3 <이동>
 void status() {
 	if (si == 0 && turn % 2 == 0) {
 		printf("\n");
@@ -232,7 +232,7 @@ void status() {
 	}
 }
 
-// 마동석 움직일지 안할지 입력받기
+// 마동석 움직일지 안할지 입력받기 2-3 <이동>
 void ma_move() { 
 	while (1) {
 		if (turn != 1) {
@@ -265,7 +265,7 @@ void ma_move() {
 	}
 }
 
-//마동석 상태
+//마동석 상태  2-3 <이동>
 void ma_status() { 
 	if (ma_move_1 == 0) {
 		printf("\nmadongseok stay %d (aggro: %d stamina: %d) \n", ma,ma_aggro, mas);
@@ -291,14 +291,14 @@ void game_over() {
 	}
 }
 
-//마동석 스테미나 깎이는거
+//마동석 스테미나 깎이는거 2-3 <이동>
 void ma_hurt() {
 	if (ma == zom - 1) {
 		mas--;
 	}
 }
 
-//마동석 스테미나 안내려가게 하는거
+//마동석 스테미나 안내려가게 하는거 2-3 <이동>
 void mas_no_0() {
 	if (ma_aggro < AGGRO_MIN) {
 		ma_aggro = AGGRO_MIN;
@@ -308,19 +308,19 @@ void mas_no_0() {
 	}
 }
 
-//홀드 할 확률
+//홀드 할 확률 2-3 <이동> : 예외처리
 void grab(){
 	hold = rand() % 100 + 1;
 }
 
-// 시민은 아무것도 하지 않았습니다
+// 시민은 아무것도 하지 않았습니다 2-3 <이동>
 void citizen_nothing() {
 	if (cit != 1) {
 		printf("citizen does nothing");
 	}
 }
 
-// 좀비 공격 메시지
+// 좀비 공격 메시지 2-3 <이동>
 void zombie_attack() {
 	if (zom - 1 != cit || zom - 1 != ma) {
 		printf("zombie attacked nobody");
@@ -330,7 +330,7 @@ void zombie_attack() {
 	}
 }
 
-// 동석이형 좀비와 인접했을 떄
+// 동석이형 좀비와 인접했을 떄 2-4 <행동>
 void zombie_ma() {
 	if (zom + 1 == ma) {
 		printf("madongseok action( 0.rest, 1.provoke, 2.pull)>>");
@@ -359,7 +359,7 @@ void zombie_ma() {
 	}
 }
 
-// 동석이형 좀비랑 인접하지 않았을 때
+// 동석이형 좀비랑 인접하지 않았을 때 2-4 <행동>
 void no_zombie_ma() {
 	if (zom + 1 != ma) {
 		printf("madongseok action( 0.rest, 1.provoke )>>");
@@ -377,7 +377,7 @@ void no_zombie_ma() {
 	}
 }
 
-// 동석이형,시민 vs 좀비
+// 동석이형,시민 vs 좀비 2-4 <행동> 
 void high_aggro() {
 	if (ma_aggro > aggro) {
 		mas_no_0();
@@ -388,7 +388,7 @@ void high_aggro() {
 	}
 }
 
-// 동석이형 시민 좀비 만났을때
+// 동석이형 시민 좀비 만났을때 2-4 <행동>
 void meeting() {
 	if (cit - 1 == zom &&  zom == ma + 1) {
 		high_aggro();
