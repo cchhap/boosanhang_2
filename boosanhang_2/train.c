@@ -418,7 +418,7 @@ int main() {
 		}
 		ma_move(); // 마동석 이동
 		mas_no_0(); //동석이형 스태미나 관리
-		ma_hurt(); // 동석이형 맞았는지 아닌지 보기
+		ma_hurt(); // 동석이형 맞는지 아닌지 보기
 		printf("\n");
 		zombie_ma(); //좀비랑 인접할 때
 		no_zombie_ma(); // 좀비랑 인접하지 않을 때
