@@ -189,6 +189,7 @@ void zom_status() {
 	if (turn % 2 != 0) {
 		if (zom + 1 == ma) {
 			zom--;
+			zomloc = zom + 1;
 		}
 		else {
 			if (aggro > ma_aggro) {
