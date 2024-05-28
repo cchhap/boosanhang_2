@@ -29,7 +29,7 @@
 int zom = 0; int cit = 0; int ma = 0; int length = 0; int per = 0; int move1 = 0; int move2 = 0; int turn = 0; int citloc = 0; int zomloc = 0; int mas = 0;//변수선언
 int aggro = 1; int si = 0; int zo = 0; int ma_aggro = 1; int ma_move_1 = 0; int over = 0; int hold = 0; int pull = 0; int zomma = 0; int zomma_1;
 
-// 인트로
+// 인트로 2-1
 void intro() {
 	printf("\n----------------------\n");
 	printf("\nBooSanHang\n");
@@ -38,7 +38,7 @@ void intro() {
 	printf("\n\n");
 }
 
-//열차의 길이 입력받기
+//열차의 길이 입력받기 2-1
 void train_length() { 
 	while(1){
 		printf("train_length(15~50)>>");
@@ -53,7 +53,7 @@ void train_length() {
 	
 }
 
-//무언가가 일어날 확률
+//무언가가 일어날 확률 2-1
 void probability_percentage() { //무언가가 일어날 확률
 	while(1){
 		printf("probability_percentage 'p' (10~90)>>");
@@ -83,14 +83,14 @@ void madongseok_stamina() {
 	
 }
 
-// 위치
+// 위치 2-1
 void location() {
 	zom = length - 3;
 	cit = length - 6;
 	ma = length - 2;
 }
 
-//기차 출력
+//기차 출력 2-1
 void output_train() {
 	for (int i = 0; i < length; i++) {
 		printf("#");
