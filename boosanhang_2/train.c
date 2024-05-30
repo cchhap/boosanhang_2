@@ -262,13 +262,16 @@ void ma_move() {
 				break;
 			}
 		}
-		else {
+		else if(zom - 1 == ma) {
 			printf("madongseok move(0:stay)>>");
 			scanf_s("%d", &ma_move_1);
 			if (ma_move_1 == 0) {
 				ma_aggro--;
 				break;
 			}
+		}
+		else {
+			continue;
 		}
 	}
 }
@@ -389,17 +392,24 @@ void zombie_ma() {
 // 동석이형 좀비랑 인접하지 않았을 때 2-4 <행동>
 void no_zombie_ma() {
 	if (zom + 1 != ma) {
-		printf("madongseok action( 0.rest, 1.provoke )>>");
-		scanf_s("%d", &zomma_1);
-		if (zomma_1 == 0) {
-			printf("\nmadongseok rests...");
-			ma_aggro--;
-			mas_no_0();
-			mas++;
-		}
-		else if (zomma_1 == 1) {
-			printf("\nmadongseok provoked zombie...");
-			ma_aggro = STM_MAX;
+		while (1) {
+			printf("madongseok action( 0.rest, 1.provoke )>>");
+			scanf_s("%d", &zomma_1);
+			if (zomma_1 == 0) {
+				printf("\nmadongseok rests...");
+				ma_aggro--;
+				mas_no_0();
+				mas++;
+				break;
+			}
+			else if (zomma_1 == 1) {
+				printf("\nmadongseok provoked zombie...");
+				ma_aggro = STM_MAX;
+				break;
+			}
+			else {
+				continue;
+			}
 		}
 	}
 }
