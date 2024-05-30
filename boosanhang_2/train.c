@@ -303,15 +303,15 @@ void ma_status() {
 //게임 끝나는거
 void game_over() {
 	if (cit == 1) {
-		printf("YOU WIN! ...");
+		printf("YOU WIN! ...\n");
 		over = 1;
 	}
 	else if (cit == zom - 1) {
-		printf("GAME OVER! citizen dead...");
+		printf("GAME OVER! citizen dead...\n");
 		over = 1;
 	}
 	else if (mas == STM_MIN) {
-		printf("GAME OVER! madongseok dead...");
+		printf("GAME OVER! madongseok dead...\n");
 		over = 1;
 	}
 }
@@ -472,15 +472,20 @@ int main() {
 	printf("\n");
 	printf("\n");
 	while (1) {
-		printf("\nround %d\n", round_1+1);
-		while(1){
+		while (1) {
+			over = 0;
+			round_1++;
+			printf("\n");
+			if (round_1 > 4) {
+				break;
+			}
+			printf("\nround %d\n", round_1);
 			location(); // 캐릭터들 위치 설정
 			printf("\n");
 			printf("\n");
 			round();
-			round_1++;
 		}
-		if (round_1 == 3) {
+		if (round_1 > 4) {
 			break;
 		}
 	}
