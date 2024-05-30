@@ -27,7 +27,7 @@
 
 //2-1 부산헹(1)코드를 20줄 이내의 함수로 정리한다
 int zom = 0; int cit = 0; int ma = 0; int length = 0; int per = 0; int move1 = 0; int move2 = 0; int turn = 0; int citloc = 0; int zomloc = 0; int mas = 0; //변수선언
-int aggro = 1; int si = 0; int zo = 0; int ma_aggro = 1; int ma_move_1 = 0; int over = 0; int hold = 0; int pull = 0; int zomma = 0; int zomma_1;
+int aggro = 1; int si = 0; int zo = 0; int ma_aggro = 1; int ma_move_1 = 0; int over = 0; int hold = 0; int pull = 0; int zomma = 0; int zomma_1; int round_1 = 0;
 
 // 인트로 2-1
 void intro() {
@@ -422,16 +422,8 @@ void meeting() {
 
 }
 
-int main() {
-	srand((unsigned int)time(NULL));
-	intro(); //인트로
-	train_length(); // 기차 길이
-	location(); // 캐릭터들 위치 설정
-	madongseok_stamina(); // 마동석 스테미나
-	probability_percentage(); // 일어날 확률
-	output_train();	 // 기차 출력
-	printf("\n");
-	printf("\n");
+// 한 라운드 3-1
+void round() {
 	while (1) {
 		turn++; // 턴증가
 		mas_no_0();
@@ -442,7 +434,7 @@ int main() {
 		status(); // 시민, 좀비 위치
 		mas_no_0();
 		game_over(); // 게임오버인지 아닌지 계속 검사
-		if (over == 1) {
+		if (over == 1 ) {
 			break;
 		}
 		printf("\n");
@@ -467,5 +459,32 @@ int main() {
 		ma_status(); // 마동석 어그로, 스태미나
 		printf("\n");
 	}
+}
+
+int main() {
+	srand((unsigned int)time(NULL));
+	intro(); //인트로
+	train_length(); // 기차 길이
+	location(); // 캐릭터들 위치 설정
+	madongseok_stamina(); // 마동석 스테미나
+	probability_percentage(); // 일어날 확률
+	output_train();	 // 기차 출력
+	printf("\n");
+	printf("\n");
+	while (1) {
+		printf("\nround %d\n", round_1+1);
+		while(1){
+			location(); // 캐릭터들 위치 설정
+			printf("\n");
+			printf("\n");
+			round();
+			round_1++;
+		}
+		if (round_1 == 3) {
+			break;
+		}
+	}
+	
+	
 
 }
